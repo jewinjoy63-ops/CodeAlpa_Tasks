@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise AI Studio - FAQ Core (Expanded)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: radial-gradient(circle at 50% 0%, #0f172a 0%, #020617 100%);
+            overflow-x: hidden;
+        }
+        .neon-glow-border {
+            box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.15), 0 0 15px -5px rgba(59, 130, 246, 0.1);
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .message-bubble {
+            animation: slideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(12px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .custom-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 99px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #334155; }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-3 md:p-6 font-sans text-slate-200 antialiased">
+
+    <div class="w-full max-w-6xl h-[88vh] glass-panel rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row border border-slate-800/60 neon-glow-border relative">
+        
+        <div class="w-full md:w-72 bg-slate-950/70 border-b md:border-b-0 md:border-r border-slate-900 flex flex-col p-5 justify-between">
+            <div>
+                <div class="flex items-center gap-2.5 mb-6">
+                    <div class="w-3 h-3 rounded-full bg-cyan-500 animate-ping absolute"></div>
+                    <div class="w-3 h-3 rounded-full bg-cyan-500 relative"></div>
+                    <span class="text-xs uppercase font-mono tracking-widest text-cyan-400 font-bold">Node Connection Active</span>
+                </div>
+                
+                <h2 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Model Core Performance</h2>
+                <div class="flex flex-col gap-2.5 mb-6">
+                    <div class="bg-slate-900/60 border border-slate-800/60 rounded-xl p-3 flex justify-between items-center">
+                        <span class="text-xs text-slate-400">Response Latency</span>
+                        <span class="text-xs font-mono font-bold text-emerald-400" id="statLatency">0ms</span>
+                    </div>
+                    <div class="bg-slate-900/60 border border-slate-800/60 rounded-xl p-3 flex justify-between items-center">
+                        <span class="text-xs text-slate-400">Cached Matrix Array</span>
+                        <span class="text-xs font-mono font-bold text-indigo-400">10 Core Sets</span>
+                    </div>
+                    <div class="bg-slate-900/60 border border-slate-800/60 rounded-xl p-3 flex justify-between items-center">
+                        <span class="text-xs text-slate-400">Total Tokens Parsed</span>
+                        <span class="text-xs font-mono font-bold text-cyan-400" id="statTokens">0</span>
+                    </div>
+                </div>
+
+                <h2 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Track Specifications</h2>
+                <p class="text-xs text-slate-400 leading-relaxed bg-slate-900/30 p-3 rounded-xl border border-slate-900">
+                    CodeAlpha AI Internship Track. System uses standalone Jaccard Set Intersection mapping for zero-dependency client execution loops.
+                </p>
+            </div>
+
+            <div class="pt-4 border-t border-slate-900 hidden md:block">
+                <div class="text-[11px] font-mono text-slate-600">REPOSITORY CLUSTER</div>
+                <div class="text-xs font-bold text-slate-400 font-mono tracking-tight mt-0.5">CodeAlpha_FAQ</div>
+            </div>
+        </div>
+
+        <div class="flex-1 flex flex-col h-full overflow-hidden bg-slate-950/20">
+            
+            <div class="p-4 bg-slate-900/40 border-b border-slate-800/80 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white flex items-center justify-center shadow-lg shadow-cyan-500/10">
+                        <i class="fa-solid fa-brain text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-sm font-bold tracking-tight text-white flex items-center gap-1.5">
+                            FAQ ChatBot <span class="text-[10px] bg-cyan-500/10 text-cyan-400 px-1.5 py-0.5 rounded-md border border-cyan-500/20 font-mono">V2.1-MAX</span>
+                        </h1>
+                        <p class="text-xs text-slate-400">AI Conversational Node</p>
+                    </div>
+                </div>
+                <button onclick="clearConversationalHistory()" title="Reset Session Workspace" class="w-9 h-9 rounded-xl border border-slate-800 hover:bg-slate-800/60 text-slate-400 hover:text-white flex items-center justify-center active:scale-95 transition">
+                    <i class="fa-solid fa-arrow-rotate-left text-xs"></i>
+                </button>
+            </div>
+
+            <div class="px-4 py-2 bg-slate-950/40 border-b border-slate-900/60 flex items-center gap-2 overflow-x-auto custom-scroll whitespace-nowrap">
+                <span class="text-[9px] uppercase tracking-widest text-slate-500 font-bold font-mono">Hot Queries:</span>
+                <button onclick="fireSuggestedQuery('What is CodeAlpha?')" class="text-xs bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 px-3 py-1 rounded-lg transition active:scale-95">About CodeAlpha</button>
+                <button onclick="fireSuggestedQuery('How do I submit my completed internship tasks?')" class="text-xs bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 px-3 py-1 rounded-lg transition active:scale-95">Task Submissions</button>
+                <button onclick="fireSuggestedQuery('What are the internship completion criteria?')" class="text-xs bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 px-3 py-1 rounded-lg transition active:scale-95">Completion Criteria</button>
+                <button onclick="fireSuggestedQuery('What libraries are required for Task 3 music generation?')" class="text-xs bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 px-3 py-1 rounded-lg transition active:scale-95">Task 3 Architecture</button>
+                <button onclick="fireSuggestedQuery('Can I use a pre-trained model for Task 4 object detection?')" class="text-xs bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 px-3 py-1 rounded-lg transition active:scale-95">Task 4 Models</button>
+            </div>
+
+            <div id="chatStream" class="flex-1 p-4 md:p-6 overflow-y-auto custom-scroll flex flex-col gap-5 bg-slate-950/10">
+                
+                <div class="flex gap-3.5 max-w-[85%] self-start message-bubble">
+                    <div class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-cyan-400 flex items-center justify-center flex-shrink-0 text-sm shadow shadow-black">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <div class="bg-slate-900/80 border border-slate-800 text-slate-200 px-4 py-3.5 rounded-2xl rounded-tl-none text-sm leading-relaxed shadow-xl">
+                            Core matrix expanded with 10 tracking vectors. I am initialized to handle inquiries regarding documentation, timelines, project parameters, dependencies, and certification validations. What can I map for you?
+                        </div>
+                        <span class="text-[10px] text-slate-600 font-mono px-0.5">System Assistant • Matrix Expanded</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="p-4 border-t border-slate-900 bg-slate-950/60 backdrop-blur-md">
+                <form id="consoleForm" class="flex items-center gap-3 relative">
+                    <div class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">
+                        <i class="fa-solid fa-command text-xs"></i>
+                    </div>
+                    <input type="text" id="consoleInput" autocomplete="off" placeholder="Query expanded model array (e.g., 'What is Task 3 code objective?')..." 
+                        class="flex-1 bg-slate-900/90 border border-slate-800 focus:border-cyan-500/60 rounded-xl pl-10 pr-12 py-3.5 text-sm text-slate-100 placeholder-slate-600 focus:outline-none transition-all duration-200">
+                    <button type="submit" 
+                        class="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white flex items-center justify-center transition active:scale-95 shadow-md shadow-cyan-950">
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const chatStream = document.getElementById('chatStream');
+        const consoleForm = document.getElementById('consoleForm');
+        const consoleInput = document.getElementById('consoleInput');
+        
+        // Metrics Counters
+        let parsedTokenCounter = 0;
+        let activeMessageCount = 0;
+
+        // 📝 EXPANDED 10-VECTOR KNOWLEDGE BASE DATABASE MATRIX
+        const LOGICAL_FAQ_INDEX = [
+            {
+                keywords: ["what", "codealpha", "company", "firm", "who", "organization"],
+                question: "What is CodeAlpha?",
+                answer: "CodeAlpha is an innovative technology enterprise focused on delivering production software ecosystems, cloud infrastructure layouts, and verified technical mentorship through rigorous specialized computer science tracks."
+            },
+            {
+                keywords: ["how", "submit", "project", "upload", "task", "github", "link", "where", "whatsapp"],
+                question: "How do I submit my completed internship tasks?",
+                answer: "You must commit your program architecture directly to a public GitHub repository named exactly 'CodeAlpha_ProjectName', compile a functional screen recording video walkthrough to LinkedIn tagging @CodeAlpha with your repo link active, and finalize parameters inside your tracking WhatsApp channel form."
+            },
+            {
+                keywords: ["criteria", "passing", "fail", "pass", "minimum", "completed", "tasks", "many", "certificate", "get"],
+                question: "What are the internship completion criteria?",
+                answer: "To satisfy graduation audits and generate your unique QR-Verified completion credentials, you are strictly required to resolve and compile at least 2 or 3 project tasks contained inside your domain documentation. Submitting only one task is evaluated as an incomplete tenure."
+            },
+            {
+                keywords: ["deadline", "timeline", "date", "when", "time", "frame", "duration", "long"],
+                question: "What is the timeline framework for completion?",
+                answer: "All structural scripts must be successfully committed and logged inside the grading database prior to the expiration window stated in your original confirmation package or official track communications."
+            },
+            {
+                keywords: ["task", "3", "music", "libraries", "generation", "required", "rnn", "lstm", "data", "midi", "music21"],
+                question: "What libraries and parameters are required for Task 3 music generation?",
+                answer: "Task 3 (Music Generation with AI) requires capturing baseline MIDI audio files (classical or jazz) and preprocessing them into training-friendly note arrays using the 'music21' parsing package. Your core network model must feature recurrent tracking blocks (like LSTMs) or Generative Adversarial Networks (GANs) to compile unique generative MIDI configurations directly onto storage arrays."
+            },
+            {
+                keywords: ["task", "4", "object", "detection", "tracking", "yolo", "opencv", "sort", "pretrained"],
+                question: "Can I use a pre-trained model for Task 4 object detection?",
+                answer: "Yes, Task 4 explicitly allows utilizing high-performance pre-trained architectures such as YOLO (You Only Look Once) or Faster R-CNN coupled with OpenCV to access real-time webcam video arrays. For tracking components across video vectors, you must implement frameworks like SORT or Deep SORT to assign steady sequential Tracking IDs inside dynamic bounding fields."
+            },
+            {
+                keywords: ["error", "api", "not", "working", "cors", "network", "blocked", "fail", "fetch"],
+                question: "How do I resolve network latency or API fetch blocks in my scripts?",
+                answer: "If your browser flags network exceptions or blocks asynchronous requests, ensure your endpoint protocols match cleanly. For client-side tasks, using robust gateways (like MyMemory architecture) ensures zero CORS or key-authorization errors out-of-the-box inside standard browser execution loops."
+            },
+            {
+                keywords: ["letter", "recommendation", "lor", "perks", "stipend", "incentives"],
+                question: "How is the Letter of Recommendation (LOR) distributed?",
+                answer: "An official customized Letter of Recommendation (LOR) is generated uniquely for high-performing interns who go beyond standard requirements—such as clean code factoring, pushing all 4 functional code solutions, or delivering exceptional analytical video evaluations."
+            },
+            {
+                keywords: ["extension", "more", "time", "late", "can", "i", "submit", "after"],
+                question: "Is it possible to request a project submission timeline extension?",
+                answer: "Extensions are granted under exceptional structural circumstances. You must submit a formal query directly to the support desk via services@codealpha.tech or prompt your assigned channel administrators before the hard deadline window closes."
+            },
+            {
+                keywords: ["verification", "qr", "certificate", "authentic", "how", "long", "days", "receive"],
+                question: "How long does it take to receive and verify the internship certificate?",
+                answer: "Following successful task validation and form auditing, completion documents are systematically audited and issued within 7 to 14 business days. Certificates feature a unique identification hash value and an embedded secure QR code vector allowing corporate recruiters to verify your credentials instantly on our company domain."
+            }
+        ];
+
+        // 🔍 ADVANCED ALGORITHMIC SIMILARITY FILTER WITH TOKEN STACKING
+        function executeHighPerformanceMatching(inputString) {
+            const stopWords = new Set(["is", "a", "the", "an", "do", "i", "for", "of", "in", "to", "my", "your", "on", "with", "any", "me", "about"]);
+            
+            // Clean/Tokenize Utility
+            const tokenize = text => text.toLowerCase()
+                .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g," ")
+                .split(/\s+/)
+                .filter(word => word.length > 0);
+
+            const inputTokens = tokenize(inputString);
+            parsedTokenCounter += inputTokens.length;
+            document.getElementById('statTokens').textContent = parsedTokenCounter;
+
+            if (inputTokens.length === 0) return { score: 0, answer: "" };
+
+            let optimalMatchAnswer = "";
+            let pinnacleScore = 0;
+
+            LOGICAL_FAQ_INDEX.forEach(faq => {
+                const targetTokens = tokenize(faq.question);
+                
+                // Track matches while weighing keyword definitions heavier than structural stop-words
+                let intersections = 0;
+                let keywordGains = 0;
+
+                inputTokens.forEach(token => {
+                    if (targetTokens.includes(token)) {
+                        intersections += stopWords.has(token) ? 0.3 : 1.0;
+                    }
+                    if (faq.keywords.includes(token)) {
+                        keywordGains += 1.5;
+                    }
+                });
+
+                // Normalization Matrix Strategy
+                const unionLength = new Set([...inputTokens, ...targetTokens]).size;
+                const baseJaccard = intersections / Math.max(unionLength, 1);
+                const weightKeywordBonus = keywordGains / Math.max(inputTokens.length, 1);
+                
+                // Compute combined balanced weight vector score
+                const finalAmalgamScore = (baseJaccard * 0.40) + (weightKeywordBonus * 0.60);
+                
+                if (finalAmalgamScore > pinnacleScore) {
+                    pinnacleScore = finalAmalgamScore;
+                    optimalMatchAnswer = faq.answer;
+                }
+            });
+
+            // Cap matrix output bounding range cleanly
+            return {
+                score: Math.min(pinnacleScore, 1),
+                answer: optimalMatchAnswer
+            };
+        }
+
+        // Form Submission Catchment Node
+        consoleForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            dispatchUserStreamQuery();
+        });
+
+        // Fire Suggestion Chips Immediately
+        function fireSuggestedQuery(text) {
+            consoleInput.value = text;
+            dispatchUserStreamQuery();
+        }
+
+        // Processing Pipeline Management
+        function dispatchUserStreamQuery() {
+            const rawQueryText = consoleInput.value.trim();
+            if(!rawQueryText) return;
+
+            const trackingStartTime = performance.now();
+
+            // Append User Chat Vector Node
+            generateChatBubbleElement(rawQueryText, 'user');
+            consoleInput.value = '';
+            chatStream.scrollTop = chatStream.scrollHeight;
+
+            // Trigger Typing Framework Node
+            const trackingIndicatorDomId = generateTypingIndicatorNode();
+            chatStream.scrollTop = chatStream.scrollHeight;
+
+            // Model Resolution Latency Delay Loop Sim
+            setTimeout(() => {
+                document.getElementById(trackingIndicatorDomId).remove();
+                
+                const evaluationResult = executeHighPerformanceMatching(rawQueryText);
+                const runtimeLatency = (performance.now() - trackingStartTime).toFixed(0);
+                document.getElementById('statLatency').textContent = `${runtimeLatency}ms`;
+
+                // Set hard logical acceptance pass-gate criteria (Confidence Score > 22%)
+                if (evaluationResult.score > 0.22) {
+                    generateChatBubbleElement(evaluationResult.answer, 'bot', evaluationResult.score);
+                } else {
+                    const fallbackTemplateString = "System analysis failure. Your query cannot be confidently parsed against any of the 10 indexed matrix layers. Please direct this structural inquiry onwards to services@codealpha.tech or contact the support line via WhatsApp (+91 9336576683).";
+                    generateChatBubbleElement(fallbackTemplateString, 'bot', 0);
+                }
+                chatStream.scrollTop = chatStream.scrollHeight;
+            }, 600);
+        }
+
+        // Structural UI Bubble Generator Factory
+        function generateChatBubbleElement(messageText, agentRole, calculatedConfidence = null) {
+            activeMessageCount++;
+            const timestampString = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const bubbleRowWrapper = document.createElement('div');
+            
+            if (agentRole === 'user') {
+                bubbleRowWrapper.className = "flex gap-3.5 max-w-[85%] self-end flex-row-reverse message-bubble";
+                bubbleRowWrapper.innerHTML = `
+                    <div class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 text-slate-400 flex items-center justify-center flex-shrink-0 text-xs shadow-inner">
+                        <i class="fa-solid fa-user-astronaut"></i>
+                    </div>
+                    <div class="flex flex-col gap-1.5 items-end">
+                        <div class="bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-medium px-4 py-3.5 rounded-2xl rounded-tr-none text-sm leading-relaxed shadow-lg">
+                            ${messageText}
+                        </div>
+                        <span class="text-[10px] text-slate-600 font-mono px-0.5">${timestampString}</span>
+                    </div>
+                `;
+            } else {
+                bubbleRowWrapper.className = "flex gap-3.5 max-w-[85%] self-start message-bubble";
+                
+                let metricsBadgeElement = "";
+                if (calculatedConfidence !== null) {
+                    const cleanPercentage = (calculatedConfidence * 100).toFixed(0);
+                    const colorStyleClasses = cleanPercentage > 55 ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border-amber-500/20';
+                    metricsBadgeElement = `<span class="text-[9px] border px-1.5 py-0.5 rounded-md font-mono font-semibold uppercase ${colorStyleClasses}">Match Confidence: ${cleanPercentage}%</span>`;
+                }
+
+                // Unique ID generation for TTS triggering macro hooks
+                const utilityMacroSeedId = `util_${Date.now()}_${activeMessageCount}`;
+
+                bubbleRowWrapper.innerHTML = `
+                    <div class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-cyan-400 flex items-center justify-center flex-shrink-0 text-sm shadow">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <div class="bg-slate-900/90 border border-slate-800/80 text-slate-200 px-4 py-3.5 rounded-2xl rounded-tl-none text-sm leading-relaxed shadow-lg relative group">
+                            <p id="txt_${utilityMacroSeedId}">${messageText}</p>
+                            
+                            <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-200 absolute -bottom-3 right-3 flex items-center gap-1.5 bg-slate-950 border border-slate-800 px-1.5 py-1 rounded-lg shadow-xl">
+                                <button onclick="triggerAudioSynthesisEngine('txt_${utilityMacroSeedId}')" title="Audio Readout" class="w-5 h-5 text-[10px] text-slate-400 hover:text-cyan-400 transition"><i class="fa-solid fa-volume-high"></i></button>
+                                <button onclick="replicateTextContentToClipboard('txt_${utilityMacroSeedId}', this)" title="Copy Data String" class="w-5 h-5 text-[10px] text-slate-400 hover:text-emerald-400 transition"><i class="fa-solid fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 px-0.5">
+                            <span class="text-[10px] text-slate-600 font-mono">${timestampString}</span>
+                            ${metricsBadgeElement}
+                        </div>
+                    </div>
+                `;
+            }
+            chatStream.appendChild(bubbleRowWrapper);
+        }
+
+        // Typing Indicator Block Element Generator
+        function generateTypingIndicatorNode() {
+            const structuralRandomId = "node_" + Math.random().toString(36).substring(4);
+            const indicatorWrapperNode = document.createElement('div');
+            indicatorWrapperNode.id = structuralRandomId;
+            indicatorWrapperNode.className = "flex gap-3.5 max-w-[85%] self-start animate-pulse";
+            indicatorWrapperNode.innerHTML = `
+                <div class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-slate-500 flex items-center justify-center flex-shrink-0 text-sm">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="bg-slate-900/40 border border-slate-900 text-slate-500 px-4 py-3 rounded-2xl rounded-tl-none text-xs font-mono tracking-wide flex items-center gap-1">
+                    Matrix computing<span class="animate-bounce">.</span><span class="animate-bounce [animation-delay:0.15s]">.</span><span class="animate-bounce [animation-delay:0.3s]">.</span>
+                </div>
+            `;
+            chatStream.appendChild(indicatorWrapperNode);
+            return structuralRandomId;
+        }
+
+        // Audio Speech Synthesis Engine Util Hook
+        function triggerAudioSynthesisEngine(textContainerId) {
+            const targetStringText = document.getElementById(textContainerId).textContent;
+            window.speechSynthesis.cancel(); // Terminate existing voices instantly
+            const expressionObject = new SpeechSynthesisUtterance(targetStringText);
+            expressionObject.lang = 'en-US';
+            window.speechSynthesis.speak(expressionObject);
+        }
+
+        // Clipboard Replica Module Macro
+        function replicateTextContentToClipboard(textContainerId, buttonElement) {
+            const lookupStringValue = document.getElementById(textContainerId).textContent;
+            navigator.clipboard.writeText(lookupStringValue).then(() => {
+                const nativeIconContainer = buttonElement.innerHTML;
+                buttonElement.innerHTML = `<i class="fa-solid fa-check text-emerald-400"></i>`;
+                setTimeout(() => { buttonElement.innerHTML = nativeIconContainer; }, 1500);
+            });
+        }
+
+        // Reset Workspace Module Helper
+        function clearConversationalHistory() {
+            chatStream.innerHTML = `
+                <div class="flex gap-3.5 max-w-[85%] self-start message-bubble">
+                    <div class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-cyan-400 flex items-center justify-center flex-shrink-0 text-sm shadow">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                        <div class="bg-slate-900/80 border border-slate-800 text-slate-200 px-4 py-3.5 rounded-2xl rounded-tl-none text-sm leading-relaxed shadow-xl">
+                            Conversational buffer reset complete. Context logs cleared successfully.
+                        </div>
+                        <span class="text-[10px] text-slate-600 font-mono px-0.5">System Node • Flushed Cache</span>
+                    </div>
+                </div>
+            `;
+            document.getElementById('statLatency').textContent = '0ms';
+        }
+    </script>
+</body>
+</html>
